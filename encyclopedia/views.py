@@ -16,5 +16,6 @@ def entry_details(request, title):
         {'title': title, 'content': content})
 
 
-def names(request, names):
-    return HttpResponse(f"Hello, {names}")
+#def search(request, searchText):
+#  return none
+
