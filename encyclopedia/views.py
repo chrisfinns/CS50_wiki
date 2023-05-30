@@ -1,7 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django import forms
 from . import util
+
+
+class searchForm(forms.Form):
+    query = forms.CharField(label="Search")
+
+
+def search(request):
+    query = request.GET.get('q', '')
+    
+
+
 
 
 def index(request):
