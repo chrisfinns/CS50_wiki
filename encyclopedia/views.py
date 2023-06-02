@@ -10,8 +10,27 @@ class searchForm(forms.Form):
 
 def search(request):
     query = request.GET.get('q', '')
+    search_results = []
+    entries = util.list_entries()
+    
+   
+    for entry in entries:
+        if query == entry:
+            search_results.append(query)
+            print(f"{search_results}")
+        else:
+            print("Not in entries")
+
+    return render(request, "encyclopedia/search.html", {
+        "results": search_results,
+        
+    })
+    #This 
+    #return HttpResponse(print(f"{query}"))
+    #return render(request, "encyclopedia/search.html", {
     
 
+    #})
 
 
 
