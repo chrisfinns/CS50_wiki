@@ -15,8 +15,9 @@ def search(request):
     
    
     for entry in entries:
-        if query == entry:
-            search_results.append(query)
+        
+        if query in entry.lower():
+            search_results.append(entry)
             print(f"{search_results}")
         else:
             print("Not in entries")
