@@ -12,7 +12,11 @@
     <ul>
         {% for result in results %}
             <li><a href="{% url 'encyclopedia:wiki_entry' result %}"> {{result}} </a></li>
+        
+        {% empty %}
+            <p>There are no results</p>
         {% endfor %}
+        
     </ul>
    
 {% endblock %}

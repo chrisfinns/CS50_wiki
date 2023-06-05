@@ -18,20 +18,17 @@ def search(request):
         
         if query in entry.lower():
             search_results.append(entry)
-            print(f"{search_results}")
-        else:
-            print("Not in entries")
-
+        
     return render(request, "encyclopedia/search.html", {
         "results": search_results,
         
     })
-    #This 
-    #return HttpResponse(print(f"{query}"))
-    #return render(request, "encyclopedia/search.html", {
+ 
+def new_page(request):
     
-
-    #})
+    
+    return render(request, "encyclopedia/new_page.html")
+    
 
 
 
