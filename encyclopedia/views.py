@@ -15,10 +15,10 @@ def search(request):
     
    
     for entry in entries:
-        
-        if query in entry.lower():
-            search_results.append(entry)
-        
+        if query == entry:
+            search_results.append(query)
+      
+
     return render(request, "encyclopedia/search.html", {
         "results": search_results,
         
