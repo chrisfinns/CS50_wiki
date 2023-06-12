@@ -90,6 +90,17 @@ def random_page(request):
 def edit(request, title):
     content = util.get_entry(title)
 
+    if request.method == "POST":
+        contentEdit = request.POST['content']
+        
+        util.save_entry(title, contentEdit)
+        #print(f"{contentEdit}")
+        
+        #entry_page = "wiki/" + str(title)
+        #return redirect(entry_page)
+        return HttpResponseRedirect(reverse("encyclopedia:wiki_entry", args=[title]))
+
+
     return render(request, "encyclopedia/edit.html", {
         'title': title, 'content': content
     })
