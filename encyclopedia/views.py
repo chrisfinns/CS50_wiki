@@ -30,11 +30,6 @@ def search(request):
         "results": search_results,
     })
 
-def new_page(request):
-    return render(request, "encyclopedia/new_page.html")
-    
-
-
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
