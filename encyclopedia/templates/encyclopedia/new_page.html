@@ -6,13 +6,16 @@
 
 {% block body %}
 
-    <form id="new_page">
-        <input type="textfield">
-        <textarea id="new_page" rows="4" cols="40"></textarea>
+    <h1> New Entry</h1>
+    <form action="{% url 'encyclopedia:new_page' %}" method="post">
+        {% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+        {% csrf_token %}
+        {{ form }}
+    <input type="submit" value="Create Page" >
     </form>
-     <div>
-
-
-     </div>
 
 {% endblock %}
