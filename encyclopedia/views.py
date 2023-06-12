@@ -5,6 +5,7 @@ from . import util
 from django.contrib import messages
 from django.urls import reverse
 import random
+import markdown2
 
 
 class searchForm(forms.Form):
@@ -37,7 +38,7 @@ def index(request):
     })
 
 def entry_details(request, title):
-    content = util.get_entry(title)
+    content = markdown2.markdown(util.get_entry(title))
     
     return render(request, 'encyclopedia/entry_detail.html', 
         {'title': title, 'content': content})
@@ -85,3 +86,10 @@ def random_page(request):
 
     entry_page = "wiki/" + str(randomPage.lower())
     return redirect(entry_page)
+
+def edit(request, title):
+    content = util.get_entry(title)
+
+    return render(request, "encyclopedia/edit.html", {
+        'title': title, 'content': content
+    })

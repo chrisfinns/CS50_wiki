@@ -5,9 +5,7 @@
 {% endblock %}
 
 {% block body %}
-
-     <div>{{ content|safe }}</div>
-     <br>
-     <a href="{% url 'encyclopedia:edit' title %}"> Edit Page</a>
-
+    <form>
+     <textarea name="content" rows="5" cols="50" > {{ content }}</textarea>
+    </form>
 {% endblock %}
