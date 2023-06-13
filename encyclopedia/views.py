@@ -38,10 +38,20 @@ def index(request):
     })
 
 def entry_details(request, title):
-    content = markdown2.markdown(util.get_entry(title))
+    entries = util.list_entries()
+    entries = [x.lower() for x in entries]
+    if title.lower() in entries:
+        content = markdown2.markdown(util.get_entry(title))
+
+        return render(request, 'encyclopedia/entry_detail.html', 
+            {'title': title, 'content': content})
     
-    return render(request, 'encyclopedia/entry_detail.html', 
-        {'title': title, 'content': content})
+    else:
+        messages.error(request, f"{title}: Entry Does Not Exist. See List of current entries:")
+
+        return render(request, "encyclopedia/index.html", {
+        "entries": util.list_entries()
+    })
 
 
 class NewPageForm(forms.Form):
@@ -61,12 +71,12 @@ def new_page(request):
             
             if title.lower() not in filenames:
                 util.save_entry(title, content)
-                entry_page = "wiki/" + str(title.lower())
+                entry_page = "wiki/" + str(title)
                 
                 return redirect(entry_page)
             
             else:
-                messages.error(request, 'Entry Exisist')
+                messages.error(request, 'Entry Exists')
 
         else:
             return render(request,"encyclopedia/new_page.html", {
@@ -94,10 +104,6 @@ def edit(request, title):
         contentEdit = request.POST['content']
         
         util.save_entry(title, contentEdit)
-        #print(f"{contentEdit}")
-        
-        #entry_page = "wiki/" + str(title)
-        #return redirect(entry_page)
         return HttpResponseRedirect(reverse("encyclopedia:wiki_entry", args=[title]))
 
 

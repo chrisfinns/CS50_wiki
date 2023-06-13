@@ -6,7 +6,11 @@
 
 {% block body %}
     <h1>All Pages</h1>
-
+    {% if messages %}
+    {% for message in messages %}
+        <p> {{ title }} {{ message }}</p>
+    {% endfor %}
+{% endif %}
     <ul>
         {% for entry in entries %}
             <li><a href="{% url 'encyclopedia:wiki_entry' entry %}">{{ entry }}</a></li>
